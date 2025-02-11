@@ -16,26 +16,5 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun trivialApp() {
-    val trivialAppVM = viewModel {TrivialAppViewModel()}
-
-    Column(modifier = Modifier.fillMaxSize()) {
-        Text(trivialAppVM.preguntes[trivialAppVM.numeroPregunta.value].enunciat, fontSize = 4.em, modifier = Modifier.align(Alignment.CenterHorizontally))
-        Spacer(modifier = Modifier.size(50.dp))
-        Row {
-            OutlinedButton(onClick = {trivialAppVM.numeroPregunta.value ++}) {
-                Text(trivialAppVM.preguntes[trivialAppVM.numeroPregunta.value].opcio1, fontSize = 2.em)
-            }
-            OutlinedButton(onClick = {trivialAppVM.numeroPregunta.value ++}) {
-                Text(trivialAppVM.preguntes[trivialAppVM.numeroPregunta.value].opcio2, fontSize = 2.em)
-            }
-        }
-        Row {
-            OutlinedButton(onClick = {trivialAppVM.numeroPregunta.value ++}) {
-                Text(trivialAppVM.preguntes[trivialAppVM.numeroPregunta.value].opcio3, fontSize = 2.em)
-            }
-            OutlinedButton(onClick = {trivialAppVM.numeroPregunta.value ++}) {
-                Text(trivialAppVM.preguntes[trivialAppVM.numeroPregunta.value].opcio4, fontSize = 2.em)
-            }
-        }
-    }
+    LibNavigation()
 }

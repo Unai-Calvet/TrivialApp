@@ -11,10 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun PanatallaMenu() {
+fun PanatallaMenu(navigateToPantallaTrivial: () -> Unit) {
     Spacer(modifier = Modifier.size(50.dp))
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Button(onClick = {}) {
+        Button(onClick = {navigateToPantallaTrivial()}) {
             Text("Nova Partida")
         }
     }

@@ -12,6 +12,18 @@ class TrivialAppViewModel : ViewModel() {
         Pregunta("Enunciat d'exemple", "Opció 1 d'exemple", "Opció 2 (la correcta)", "Opció 3 d'exemple", "Opció 4 d'exemple", 2),
         Pregunta("Enunciat 2",  "Opció 1", "Opció 2", "Opció 3 (correcta)", "Opció 4", 3)
     )
+    val numeroPregunta = mutableStateOf(0)
+    val punts = mutableStateOf(0)
 
-    var numeroPregunta = mutableStateOf(0)
+    fun seguentPregunta(navigateToPantallaPuntuacio : (Int) -> Unit, opcioEscollida: Int) {
+        if (opcioEscollida == preguntes[numeroPregunta.value].respostaCorrecta) {
+            punts.value ++
+        }
+        if (numeroPregunta.value == preguntes.lastIndex) {
+            navigateToPantallaPuntuacio(punts.value)
+        }
+        else {
+            numeroPregunta.value ++
+        }
+    }
 }
