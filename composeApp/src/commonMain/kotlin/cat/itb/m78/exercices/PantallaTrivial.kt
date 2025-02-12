@@ -23,18 +23,18 @@ fun PantallaTrivial(navigateToPantallaPuntuacio : (Int) -> Unit) {
         Text(preguntaActual.enunciat, fontSize = 4.em, modifier = Modifier.align(Alignment.CenterHorizontally))
         Spacer(modifier = Modifier.size(50.dp))
         Row {
-            OutlinedButton(onClick = {trivialAppVM.seguentPregunta({navigateToPantallaPuntuacio(trivialAppVM.punts.value)} , 1)}) {
+            OutlinedButton(onClick = {trivialAppVM.seguentPregunta(1)}) {
                 Text(preguntaActual.opcio1, fontSize = 2.em)
             }
-            OutlinedButton(onClick = {trivialAppVM.seguentPregunta({navigateToPantallaPuntuacio(trivialAppVM.punts.value)}, 2)}) {
+            OutlinedButton(onClick = {trivialAppVM.seguentPregunta(2)}) {
                 Text(preguntaActual.opcio2, fontSize = 2.em)
             }
         }
         Row {
-            OutlinedButton(onClick = {trivialAppVM.seguentPregunta({navigateToPantallaPuntuacio(trivialAppVM.punts.value)}, 3)}) {
+            OutlinedButton(onClick = {trivialAppVM.seguentPregunta(3)}) {
                 Text(preguntaActual.opcio3, fontSize = 2.em)
             }
-            OutlinedButton(onClick = {trivialAppVM.seguentPregunta({navigateToPantallaPuntuacio(trivialAppVM.punts.value)}, 4)}) {
+            OutlinedButton(onClick = {trivialAppVM.seguentPregunta(4)}) {
                 Text(preguntaActual.opcio4, fontSize = 2.em)
             }
         }

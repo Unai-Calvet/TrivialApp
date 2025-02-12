@@ -15,15 +15,12 @@ class TrivialAppViewModel : ViewModel() {
     val numeroPregunta = mutableStateOf(0)
     val punts = mutableStateOf(0)
 
-    fun seguentPregunta(navigateToPantallaPuntuacio : (Int) -> Unit, opcioEscollida: Int) {
+    fun seguentPregunta(opcioEscollida: Int) {
         if (opcioEscollida == preguntes[numeroPregunta.value].respostaCorrecta) {
             punts.value ++
         }
-        if (numeroPregunta.value == preguntes.lastIndex) {
-            navigateToPantallaPuntuacio(punts.value)
-        }
-        else {
+
             numeroPregunta.value ++
-        }
+
     }
 }

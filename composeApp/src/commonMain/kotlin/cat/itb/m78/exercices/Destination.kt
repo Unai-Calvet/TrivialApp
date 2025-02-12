@@ -24,11 +24,8 @@ fun LibNavigation() {
             PanatallaMenu(navigateToPantallaTrivial = {navController.navigate(Destination.PantallaTrivial)})
         }
         composable<Destination.PantallaTrivial> {
-        PantallaTrivial(navigateToPantallaPuntuacio = {navController.navigate(Destination.PantallaPuntuacio(it))})
+        PantallaTrivial(navigateToPantallaPuntuacio = {navController.navigate(Destination.PantallaPuntuacio)})
         }
-        composable<Destination.PantallaPuntuacio> { backStack ->
-            val punts = backStack.toRoute<Destination.PantallaPuntuacio>().punts
-            PantallaPuntuacio(navigateToPantallaMenu = {navController.navigate(Destination.PantallaMenu)}, punts = punts)
-        }
+
     }
 }
