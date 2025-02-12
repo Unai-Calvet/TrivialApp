@@ -19,8 +19,6 @@ class TrivialAppViewModel : ViewModel() {
         if (opcioEscollida == preguntes[numeroPregunta.value].respostaCorrecta) {
             punts.value ++
         }
-
-            numeroPregunta.value ++
-
+        numeroPregunta.value ++
     }
 }
