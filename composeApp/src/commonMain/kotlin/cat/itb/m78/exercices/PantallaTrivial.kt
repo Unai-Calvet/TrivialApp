@@ -22,7 +22,7 @@ fun PantallaTrivial(navigateToPantallaPuntuacio : (Int) -> Unit) {
 
     PantallaTrivial(
         pregunta.enunciat,
-        viewModel.seguentPregunta(Int),
+        viewModel::seguentPregunta,
         pregunta.opcio1,
         pregunta.opcio2,
         pregunta.opcio3,
