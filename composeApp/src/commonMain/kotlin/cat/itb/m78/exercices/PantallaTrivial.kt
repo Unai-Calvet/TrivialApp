@@ -1,80 +1,70 @@
 package cat.itb.m78.exercices
 
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlin.reflect.KFunction2
 
 @Composable
-fun PantallaTrivial(navigateToPantallaPuntuacio : (Int) -> Unit) {
-    val viewModel = viewModel{TrivialAppViewModel()}
-    val pregunta = viewModel.preguntes[viewModel.numeroPregunta.value]
+fun ScreenTrivial(navigateToScreenPunctuation: (Int) -> Unit) {
+    val viewModel = viewModel { TrivialAppViewModel() }
+    val question = viewModel.questions[viewModel.questionNumber.value]
 
-    PantallaTrivial(
-        pregunta.enunciat,
-        viewModel::seguentPregunta,
-        pregunta.opcio1,
-        pregunta.opcio2,
-        pregunta.opcio3,
-        pregunta.opcio4,
+    ScreenTrivial(
+        question,
+        viewModel::nextQuestion,
+        navigateToScreenPunctuation
     )
 }
 
 
 @Composable
-fun PantallaTrivial(enunciat : String, nextQuestion: (Int) -> Unit, opcio1 : String, opcio2 : String, opcio3 : String, opcio4 : String) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        Text(enunciat)
+fun ScreenTrivial(
+    question: TrivialAppViewModel.Question,
+    nextQuestion: KFunction2<String, (Int) -> Unit, Unit>,
+    navigateToScreenPunctuation: (Int) -> Unit
+) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Spacer(modifier = Modifier.size(50.dp))
-        Row {
-            OutlinedButton(onClick = {nextQuestion(1)}) {
-                Text(opcio1)
-            }
-            OutlinedButton(onClick = {nextQuestion(2)}) {
-                Text(opcio2)
+        Text(question.statement, fontSize = 3.em)
+        Spacer(modifier = Modifier.size(75.dp))
+
+        Column {
+            question.options.shuffled().forEachIndexed { i, option ->
+                Row {
+                    Box(modifier = Modifier.clickable {
+                        nextQuestion(
+                            option,
+                            navigateToScreenPunctuation
+                        )
+                    }.size(50.dp).border(1.dp, color = Color.Black).padding(10.dp)) {
+                        Text((i + 1).toString(), modifier = Modifier.align(Alignment.Center))
+                    }
+                    Spacer(modifier = Modifier.size(10.dp))
+                    Text(option, modifier = Modifier.align(Alignment.CenterVertically))
+                }
+                Spacer(modifier = Modifier.size(25.dp))
             }
         }
-        Row {
-            OutlinedButton(onClick = {nextQuestion(3)}) {
-                Text(opcio3)
-            }
-            OutlinedButton(onClick = {nextQuestion(4)}) {
-                Text(opcio4)
-            }
-        }
+
     }
 }
-
-//@Composable
-//fun PantallaTrivial() {
-//    val trivialAppVM = viewModel {TrivialAppViewModel()}
-//    val preguntaActual = trivialAppVM.preguntes[trivialAppVM.numeroPregunta.value]
-//
-//    Column(modifier = Modifier.fillMaxSize()) {
-//        Text(preguntaActual.enunciat, fontSize = 4.em, modifier = Modifier.align(Alignment.CenterHorizontally))
-//        Spacer(modifier = Modifier.size(50.dp))
-//        Row {
-//            OutlinedButton(onClick = {trivialAppVM.seguentPregunta(1)}) {
-//                Text(preguntaActual.opcio1, fontSize = 2.em)
-//            }
-//            OutlinedButton(onClick = {trivialAppVM.seguentPregunta(2)}) {
-//                Text(preguntaActual.opcio2, fontSize = 2.em)
-//            }
-//        }
-//        Row {
-//            OutlinedButton(onClick = {trivialAppVM.seguentPregunta(3)}) {
-//                Text(preguntaActual.opcio3, fontSize = 2.em)
-//            }
-//            OutlinedButton(onClick = {trivialAppVM.seguentPregunta(4)}) {
-//                Text(preguntaActual.opcio4, fontSize = 2.em)
-//            }
-//        }
-//    }
-//}

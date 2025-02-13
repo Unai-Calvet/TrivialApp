@@ -4,5 +4,5 @@ import androidx.compose.runtime.*
 
 @Composable
 fun App() {
-    trivialApp()
+    TrivialApp()
 }

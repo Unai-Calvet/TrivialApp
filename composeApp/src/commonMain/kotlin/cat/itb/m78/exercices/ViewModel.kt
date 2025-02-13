@@ -6,19 +6,40 @@ import androidx.lifecycle.ViewModel
 
 class TrivialAppViewModel : ViewModel() {
 
-    data class Pregunta(val enunciat: String, val opcio1: String, val opcio2: String, val opcio3: String, val opcio4: String, val respostaCorrecta: Int)
-
-    val preguntes: List<Pregunta> = listOf(
-        Pregunta("Enunciat d'exemple", "Opció 1 d'exemple", "Opció 2 (la correcta)", "Opció 3 d'exemple", "Opció 4 d'exemple", 2),
-        Pregunta("Enunciat 2",  "Opció 1", "Opció 2", "Opció 3 (correcta)", "Opció 4", 3)
+    data class Question(
+        val statement: String,
+        val options: List<String>,
+        val correctAnswer: String
     )
-    val numeroPregunta = mutableStateOf(0)
-    val punts = mutableStateOf(0)
 
-    fun seguentPregunta(opcioEscollida: Int) {
-        if (opcioEscollida == preguntes[numeroPregunta.value].respostaCorrecta) {
-            punts.value ++
+    val questions: List<Question> = listOf(
+        Question(
+            "Enunciat d'exemple",
+            listOf(
+                "Opció 1 d'exemple",
+                "Opció 2 (la correcta)",
+                "Opció 3 d'exemple",
+                "Opció 4 d'exemple"
+            ),
+            "Opció 2 (la correcta)"
+        ),
+        Question(
+            "Enunciat 2",
+            listOf("Opció 1", "Opció 2", "Opció 3 (correcta)", "Opció 4"),
+            "Opció 3 (correcta)"
+        )
+    )
+    val questionNumber = mutableStateOf(0)
+    private val points = mutableStateOf(0)
+
+    fun nextQuestion(chosenOption: String, navigateToScreenPunctuation: (Int) -> Unit) {
+        if (chosenOption == questions[questionNumber.value].correctAnswer) {
+            points.value++
         }
-        numeroPregunta.value ++
+        if (questionNumber.value == questions.lastIndex) {
+            navigateToScreenPunctuation(points.value)
+        } else {
+            questionNumber.value++
+        }
     }
 }

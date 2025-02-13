@@ -9,23 +9,36 @@ import kotlinx.serialization.Serializable
 
 object Destination {
     @Serializable
-    data object PantallaMenu
+    data object ScreenMenu
+
     @Serializable
-    data object PantallaTrivial
+    data object ScreenTrivial
+
     @Serializable
-    data object PantallaPuntuacio
+    data class ScreenPunctuation(val points: Int)
 }
 
 @Composable
 fun LibNavigation() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Destination.PantallaMenu) {
-        composable<Destination.PantallaMenu> {
-            PanatallaMenu(navigateToPantallaTrivial = {navController.navigate(Destination.PantallaTrivial)})
+    NavHost(navController = navController, startDestination = Destination.ScreenMenu) {
+        composable<Destination.ScreenMenu> {
+            ScreenMenu(navigateToScreenTrivial = { navController.navigate(Destination.ScreenTrivial) })
         }
-        composable<Destination.PantallaTrivial> {
-        PantallaTrivial(navigateToPantallaPuntuacio = {navController.navigate(Destination.PantallaPuntuacio)})
+        composable<Destination.ScreenTrivial> {
+            ScreenTrivial(navigateToScreenPunctuation = {
+                navController.navigate(
+                    Destination.ScreenPunctuation(
+                        it
+                    )
+                )
+            })
         }
-
+        composable<Destination.ScreenPunctuation> {
+            val points = it.toRoute<Destination.ScreenPunctuation>().points
+            ScreenPunctuation(
+                points = points,
+                navigateToScreenMenu = { navController.navigate(Destination.ScreenMenu) })
+        }
     }
 }
