@@ -59,9 +59,9 @@ fun ScreenTrivial(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.size(50.dp))
-        Text(question.statement, fontSize = 3.em)
         Spacer(modifier = Modifier.size(25.dp))
+        Text(question.statement, fontSize = 2.em)
+        Spacer(modifier = Modifier.size(10.dp))
         Box(
             modifier = Modifier.size(width = 350.dp, height = 400.dp)
                 .background(color = Color.LightGray)
