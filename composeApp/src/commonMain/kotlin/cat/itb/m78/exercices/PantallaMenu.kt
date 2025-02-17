@@ -17,12 +17,20 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import androidx.lifecycle.viewmodel.compose.viewModel
 import m78exercices.composeapp.generated.resources.Res
 import m78exercices.composeapp.generated.resources.logoTrivial
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun ScreenMenu(navigateToScreenTrivial: () -> Unit) {
+    val viewModel = viewModel { TrivialAppViewModel() }
+    viewModel.resetPoints()
+    ScreenMenuNoViewModel { navigateToScreenTrivial() }
+}
+
+@Composable
+fun ScreenMenuNoViewModel(navigateToScreenTrivial: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,

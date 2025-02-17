@@ -236,4 +236,7 @@ class TrivialAppViewModel : ViewModel() {
             questionNumber.value++
         }
     }
+    fun resetPoints(){
+        points.value = 0
+    }
 }
